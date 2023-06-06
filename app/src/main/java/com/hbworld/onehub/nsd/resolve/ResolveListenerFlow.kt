@@ -1,0 +1,19 @@
+package com.hbworld.onehub.nsd.resolve
+
+import android.net.nsd.NsdManager
+import android.net.nsd.NsdServiceInfo
+import com.hbworld.onehub.nsd.ResolveFailed
+import kotlinx.coroutines.channels.ProducerScope
+import kotlinx.coroutines.channels.trySendBlocking
+
+internal class ResolveListenerFlow(
+    private val producerScope: ProducerScope<ResolveEvent>
+) : NsdManager.ResolveListener {
+    override fun onResolveFailed(nsdServiceInfo: NsdServiceInfo, errorCode: Int) {
+        producerScope.channel.close(cause = ResolveFailed(nsdServiceInfo, errorCode))
+    }
+
+    override fun onServiceResolved(nsdServiceInfo: NsdServiceInfo) {
+        producerScope.trySendBlocking(ResolveEvent.ServiceResolved(nsdServiceInfo))
+    }
+}
