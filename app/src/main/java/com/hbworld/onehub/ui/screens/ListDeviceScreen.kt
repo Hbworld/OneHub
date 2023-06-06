@@ -26,7 +26,7 @@ import com.hbworld.onehub.dtos.Device
 import java.net.InetAddress
 
 @Composable
-fun ShowDevicesScreen(list: List<Device>, refreshBtnClick: () -> Unit) {
+fun ListDevicesScreen(list: List<Device>, refreshBtnClick: () -> Unit) {
     Surface(
         color = Color.White,
         modifier = Modifier.fillMaxSize()
@@ -108,8 +108,8 @@ fun ShowDevicesScreen(list: List<Device>, refreshBtnClick: () -> Unit) {
 
 @Preview
 @Composable
-fun PreviewShowDeviceScreen() {
-    ShowDevicesScreen(
+fun PreviewListDevicesScreen() {
+    ListDevicesScreen(
         listOf(
             Device(
                 ipAddress = InetAddress.getByName("192.168.1.1"),
