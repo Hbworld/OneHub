@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hbworld.onehub.dtos.Results
-import com.hbworld.onehub.ui.screens.ShowDevicesScreen
-import com.hbworld.onehub.ui.screens.ShowErrorScreen
-import com.hbworld.onehub.ui.screens.ShowLoadingScreen
+import com.hbworld.onehub.ui.screens.ErrorScreen
+import com.hbworld.onehub.ui.screens.ListDevicesScreen
+import com.hbworld.onehub.ui.screens.LoadingScreen
 import com.hbworld.onehub.ui.screens.SplashScreen
 import com.hbworld.onehub.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,17 +48,17 @@ class MainActivity : ComponentActivity() {
                 when (results) {
                     is Results.loading -> {
                         LocalContext.current.showToast("Device Discovery Started")
-                        ShowLoadingScreen()
+                        LoadingScreen()
                     }
 
                     is Results.success -> {
-                        ShowDevicesScreen(
+                        ListDevicesScreen(
                             list = (results as Results.success).data,
                             refreshBtnClick = { viewModel.searchForAvailableServices() })
                     }
 
                     is Results.error -> {
-                        ShowErrorScreen(
+                        ErrorScreen(
                             message = (results as Results.error).message,
                             onButtonClick = { viewModel.searchForAvailableServices() })
                     }

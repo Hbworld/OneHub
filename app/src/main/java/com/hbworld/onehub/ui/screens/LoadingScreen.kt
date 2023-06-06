@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ShowLoadingScreen() {
+fun LoadingScreen() {
 
     Box(
         contentAlignment = Alignment.Center,
@@ -24,6 +24,6 @@ fun ShowLoadingScreen() {
 
 @Preview
 @Composable
-fun PreviewShowLoadingScreen() {
-    ShowLoadingScreen()
+fun PreviewLoadingScreen() {
+    LoadingScreen()
 }
