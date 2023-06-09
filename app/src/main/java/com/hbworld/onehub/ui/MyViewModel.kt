@@ -10,6 +10,7 @@ import com.hbworld.onehub.domain.ResolveServiceUseCase
 import com.hbworld.onehub.domain.ServiceDiscoveryUseCase
 import com.hbworld.onehub.nsd.discovery.DiscoveryEvent
 import com.hbworld.onehub.nsd.resolve.ResolveEvent
+import com.hbworld.onehub.util.ARP
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,8 +38,13 @@ class MyViewModel @Inject constructor(
         const val TAG = "MyViewModel"
     }
 
+    fun readARP(){
+        ARP.Impl().readARPCache()
+    }
+
 
     fun searchForAvailableServices() {
+        readARP()
         _devices.value = Results.loading
         if (networkConnectivityManager.isConnected()) {
             viewModelScope.launch {
